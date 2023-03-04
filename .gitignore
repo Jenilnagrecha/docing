@@ -1,5 +1,8 @@
+*.C++ linguist-detectable=false
 *.cpp linguist-detectable=false
+*.c++ linguist-detectable=false
 *.cmake linguist-detectable=false
+*.Cmake linguist-detectable=false
 *.txt linguist-detectable=false
 # Miscellaneous
 *.class
