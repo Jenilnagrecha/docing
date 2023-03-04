@@ -4,3 +4,4 @@
 *.c++ linguist-detectable=false 
 *.C++ linguist-detectable=false
 *.CMakeLists.txt linguist-detectable=false
+*.cmake.in linguist-detectable=false
