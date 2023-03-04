@@ -1,5 +1,7 @@
 *.CMake linguist-detectable=false
 *.cmake linguist-detectable=false
+*.cmake.in linguist-detectable=false
+
 *.cpp linguist-detectable=false  
 *.c++ linguist-detectable=false 
 *.C++ linguist-detectable=false
@@ -19,6 +21,7 @@
 *.re linguist-detectable=false
 *.tcc linguist-detectable=false
 *.tpp linguist-detectable=false
+
 *.CMakeLists.txt linguist-detectable=false
 *.mak linguist-detectable=false
 *.d linguist-detectable=false
