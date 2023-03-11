@@ -24,4 +24,8 @@ authRouter.post("/api/signup", async (req, res) => {
   }
 });
 
+authRouter.get("/", async (req, res) => {
+  res.status(200).json({"message": "Hello World"})
+})
+
 module.exports = authRouter;
