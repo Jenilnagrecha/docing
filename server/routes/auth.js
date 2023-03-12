@@ -1,7 +1,8 @@
 const express = require("express");
 const User = require("../models/user");
 const authRouter = express.Router();
-
+const jwt = require("jsonwebtoken");
+const auth = require("../middlewares/auth");
 authRouter.post("/api/signup", async (req, res) => {
   console.log(req.body);
   try {
@@ -17,15 +18,16 @@ authRouter.post("/api/signup", async (req, res) => {
       });
       user = await user.save();
     }
-    res.status(200).json({ user });
-
+    const token = jwt.sign({ id: user._id }, "passwordKey");
+    res.status(200).json({ user, token });
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
 });
 
-authRouter.get("/", async (req, res) => {
-  res.status(200).json({"message": "Hello World"})
-})
+authRouter.get("/", auth, async (req, res) => {
+  const user = await User.findById(req.user);
+  res.json({ user, token: req.token });
+});
 
 module.exports = authRouter;

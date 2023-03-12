@@ -27,43 +27,44 @@ class AuthRepository {
     );
     final user = await _googleSignIn.signIn();
 
-//    try {
-    if (user != null) {
-      final userAcc = UserModel(
-          email: user.email,
-          name: user.displayName!,
-          profilePic: user.photoUrl.toString(),
-          uid: '',
-          token: '');
-      //$host/api/signup
-      var res = await _client.post(
-          Uri.parse('$host/api/signup'),
-          body: userAcc.toJson(),
-          headers: {
-            'Content-Type': 'application/json; charset=UTF-8',
-          });
+    try {
+      if (user != null) {
+        final userAcc = UserModel(
+            email: user.email,
+            name: user.displayName!,
+            profilePic: user.photoUrl.toString(),
+            uid: '',
+            token: '');
+        //$host/api/signup
+        var res = await _client.post(Uri.parse('$host/api/signup'),
+            body: userAcc.toJson(),
+            headers: {
+              'Content-Type': 'application/json; charset=UTF-8',
+            });
 
-      switch (res.statusCode) {
-        case 200:
-          final newUser =
-              userAcc.copyWith(uid: json.decode(res.body)['user']['_id']);
+        switch (res.statusCode) {
+          case 200:
+            final newUser = userAcc.copyWith(
+              uid: json.decode(res.body)['user']['_id'],
+              token: json.decode(res.body)['token'],
+            );
 
-          error = ErrorModel(
-            error: null,
-            data: newUser,
-          );
+            error = ErrorModel(
+              error: null,
+              data: newUser,
+            );
 
-          break;
+            break;
+        }
+      } else {
+        print(user);
       }
-    } else {
-      print(user);
+    } catch (e) {
+      error = ErrorModel(
+        error: e.toString(),
+        data: null,
+      );
     }
-    // } catch (e) {
-    //   error = ErrorModel(
-    //     error: e.toString(),
-    //     data: null,
-    //   );
-    // }
     return error;
   }
 }
