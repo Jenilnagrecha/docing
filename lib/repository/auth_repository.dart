@@ -92,7 +92,7 @@ class AuthRepository {
           'Content-Type': 'application/json; charset=UTF-8',
           'x-auth-token': token,
         });
-        
+
         switch (res.statusCode) {
           case 200:
             final newUser = UserModel.fromJson(
@@ -112,5 +112,10 @@ class AuthRepository {
       );
     }
     return error;
+  }
+
+  void signOut() async {
+    await _googleSignIn.signOut();
+    _localStorageRepository.setToken('');
   }
 }

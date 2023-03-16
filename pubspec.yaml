@@ -38,6 +38,7 @@ dependencies:
   flutter_riverpod: ^2.3.0
   http: ^0.13.3
   shared_preferences: ^2.0.18
+  routemaster: ^1.0.1
 
 dev_dependencies:
   flutter_test:
