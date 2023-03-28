@@ -3,9 +3,12 @@ const mongoose = require("mongoose");
 const authRouter = require("./routes/auth");
 const PORT = process.env.PORT || 3001;
 const cors = require("cors");
+const documentRouter = require("./routes/document");
+
 const app = express();
 app.use(express.json());
 app.use(authRouter);
+app.use(documentRouter);
 app.use(cors);
 
 const DB =
